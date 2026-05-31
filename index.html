@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="irissakuya — 记录知识与文章的个人站点">
+  <title>irissakuya</title>
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --surface: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #5c5c72;
+      --accent: #6b4c9a;
+      --accent-light: #ede8f5;
+      --border: #e8e4df;
+      --shadow: 0 4px 24px rgba(26, 26, 46, 0.06);
+      --radius: 12px;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --font-serif: Georgia, "Noto Serif SC", "Source Han Serif SC", serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12121a;
+        --surface: #1c1c28;
+        --text: #eaeaf0;
+        --text-muted: #9898a8;
+        --accent: #a78fd4;
+        --accent-light: #2a2438;
+        --border: #2e2e3e;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-block;
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .tagline {
+      margin-top: 0.75rem;
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    main {
+      padding-bottom: 4rem;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .intro p {
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .intro p + p {
+      margin-top: 0.75rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--accent-light);
+      border-radius: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      transition: opacity 0.15s;
+    }
+
+    .link-item:hover {
+      opacity: 0.8;
+    }
+
+    .articles {
+      list-style: none;
+    }
+
+    .articles li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .articles li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .articles li:first-child {
+      padding-top: 0;
+    }
+
+    .article-title {
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .article-title:hover {
+      color: var(--accent);
+    }
+
+    .article-meta {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .empty-hint {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="logo" href="/">irissakuya</a>
+      <p class="tagline">记录知识与文章</p>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="card">
+          <h2>关于</h2>
+          <p>欢迎来到 irissakuya。这里是我整理知识、撰写与分享文章的个人站点。</p>
+          <p>内容会持续更新，涵盖技术笔记、阅读思考与日常记录。</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <h2>文章</h2>
+          <ul class="articles">
+            <li>
+              <p class="empty-hint">暂无文章，敬请期待。</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <h2>链接</h2>
+          <div class="links">
+            <a class="link-item" href="https://github.com/gdsly4444/irissakuya" target="_blank" rel="noopener noreferrer">
+              GitHub 仓库
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 irissakuya · <a href="https://github.com/gdsly4444/irissakuya">GitHub</a></p>
+    </footer>
+  </div>
+</body>
+</html>
