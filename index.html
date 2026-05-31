@@ -1,187 +1,714 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="irissakuya — 记录知识与文章的个人站点">
-  <title>irissakuya</title>
+  <meta name="description" content="Irissakuya — A personal space for learning notes, research, and everyday reflections.">
+  <title>Irissakuya</title>
   <style>
+    @font-face {
+      font-family: "MBCorpo Text";
+      src: local("MB Corpo S Text Web"), local("MBCorpo Text"),
+           url("fonts/MBCorpo-SText-Light.woff2") format("woff2");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "MBCorpo Text";
+      src: local("MB Corpo S Text Web"), local("MBCorpo Text"),
+           url("fonts/MBCorpo-SText-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "MBCorpo Text";
+      src: local("MB Corpo S Text Web"), local("MBCorpo Text"),
+           url("fonts/MBCorpo-SText-Bold.woff2") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "MBCorpo Title";
+      src: local("MB Corpo A Title Cond Web"), local("MBCorpo Title"),
+           url("fonts/MBCorpo-ATitleCond-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "MBCorpo Title";
+      src: local("MB Corpo A Title Cond Web"), local("MBCorpo Title"),
+           url("fonts/MBCorpo-ATitleCond-Regular.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
-      --bg: #faf9f7;
-      --surface: #ffffff;
-      --text: #1a1a2e;
-      --text-muted: #5c5c72;
-      --accent: #6b4c9a;
-      --accent-light: #ede8f5;
-      --border: #e8e4df;
-      --shadow: 0 4px 24px rgba(26, 26, 46, 0.06);
-      --radius: 12px;
-      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
-      --font-serif: Georgia, "Noto Serif SC", "Source Han Serif SC", serif;
+      --bg: #ece6d9;
+      --bg-deep: #ddd4c4;
+      --surface: #faf6ee;
+      --surface-warm: #f3ece0;
+      --text: #1e1a16;
+      --muted: #5c534a;
+      --faint: #9a9084;
+      --accent: #7a5c28;
+      --accent-soft: #b8935a;
+      --line: rgba(30, 26, 22, 0.09);
+      --line-strong: rgba(30, 26, 22, 0.15);
+      --shadow: 0 1px 1px rgba(30, 26, 22, 0.04), 0 4px 16px rgba(30, 26, 22, 0.07);
+      --shadow-hover: 0 2px 8px rgba(30, 26, 22, 0.06), 0 12px 32px rgba(30, 26, 22, 0.1);
+      --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      --font-serif: "MBCorpo Title", "Corporate A", Georgia, serif;
+      --font-sans: "MBCorpo Text", "Corporate S", system-ui, sans-serif;
+      --max: 1080px;
+      --nav-h: 3.75rem;
+      --live2d: 180px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #12121a;
-        --surface: #1c1c28;
-        --text: #eaeaf0;
-        --text-muted: #9898a8;
-        --accent: #a78fd4;
-        --accent-light: #2a2438;
-        --border: #2e2e3e;
-        --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-      }
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text);
       background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(255, 248, 235, 0.5), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 100% 100%, rgba(120, 90, 50, 0.08), transparent 50%),
+        linear-gradient(168deg, #e8e0d2 0%, var(--bg) 45%, var(--bg-deep) 100%);
     }
 
-    header {
-      padding: 4rem 0 3rem;
-      text-align: center;
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--grain);
+      background-size: 280px;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
 
-    .logo {
-      display: inline-block;
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--accent);
-      text-decoration: none;
-    }
+    a { color: inherit; }
 
-    .tagline {
-      margin-top: 0.75rem;
-      font-family: var(--font-serif);
-      font-size: 1.125rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    main {
-      padding-bottom: 4rem;
-    }
-
-    section {
-      margin-bottom: 2.5rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      box-shadow: var(--shadow);
-    }
-
-    h2 {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .intro p {
-      font-size: 1.05rem;
-      color: var(--text);
-    }
-
-    .intro p + p {
-      margin-top: 0.75rem;
-    }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .link-item {
+    /* ── Nav ── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      background: var(--accent-light);
-      border-radius: 8px;
-      color: var(--accent);
-      text-decoration: none;
+      justify-content: center;
+      background: rgba(250, 246, 238, 0.82);
+      backdrop-filter: blur(14px) saturate(1.2);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .nav.scrolled {
+      border-color: var(--line);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .nav-inner {
+      width: min(var(--max), 100%);
+      padding: 0 2rem;
+      padding-right: calc(2rem + var(--live2d));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
       font-weight: 500;
-      font-size: 0.9375rem;
-      transition: opacity 0.15s;
+      letter-spacing: 0.02em;
+      text-decoration: none;
     }
 
-    .link-item:hover {
-      opacity: 0.8;
-    }
-
-    .articles {
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
       list-style: none;
     }
 
-    .articles li {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .articles li:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .articles li:first-child {
-      padding-top: 0;
-    }
-
-    .article-title {
-      font-weight: 600;
-      color: var(--text);
+    .nav-links a {
+      font-size: 0.8125rem;
+      color: var(--muted);
       text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
     }
 
-    .article-title:hover {
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    .wrap {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 0 2rem;
+      padding-right: calc(2rem + var(--live2d));
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: calc(var(--nav-h) + 3.5rem) 0 4rem;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .hero-sheet {
+      position: relative;
+      padding: 3rem 3rem 3rem 3.5rem;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--surface);
+      background-image:
+        radial-gradient(ellipse at 100% 0%, rgba(184, 147, 90, 0.07), transparent 50%),
+        var(--grain);
+      background-size: 100% 100%, 240px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      animation: enter 0.9s var(--ease) both;
+    }
+
+    .hero-sheet::before {
+      content: "";
+      position: absolute;
+      top: 1.5rem;
+      left: 2.25rem;
+      bottom: 1.5rem;
+      width: 1px;
+      background: rgba(160, 90, 80, 0.18);
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 2px;
+      margin-top: 2rem;
+      background: linear-gradient(90deg, var(--accent-soft), transparent);
+      border-radius: 1px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title em {
+      font-style: italic;
       color: var(--accent);
     }
 
-    .article-meta {
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
+    .hero-desc {
+      margin-top: 1.25rem;
+      max-width: 42em;
+      color: var(--muted);
+      font-size: 1.0625rem;
+      font-weight: 300;
     }
 
-    .empty-hint {
-      color: var(--text-muted);
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: enter 0.9s var(--ease) 0.15s both;
+    }
+
+    .hero-stat {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .hero-index {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .hero-index-title {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-index-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem 1rem;
+    }
+
+    .hero-index-list a {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-index-list a:hover { color: var(--accent); }
+
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 4.5rem 0;
+      position: relative;
+    }
+
+    section + section {
+      border-top: none;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+    }
+
+    section:first-of-type::before { display: none; }
+
+    .section-alt {
+      margin: 0 -2rem;
+      padding-left: 2rem;
+      padding-right: calc(2rem + var(--live2d));
+      background: rgba(243, 236, 224, 0.55);
+      background-image: var(--grain);
+      background-size: 320px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .sec-head {
+      margin-bottom: 2.5rem;
+    }
+
+    .sec-head-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .sec-head-row .sec-head {
+      margin-bottom: 0;
+    }
+
+    .sec-head-row .sec-head::after { display: none; }
+
+    .sec-head::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 1px;
+      margin-top: 1rem;
+      background: var(--accent-soft);
+      opacity: 0.6;
+    }
+
+    .sec-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .sec-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      background: var(--surface);
+      background-image:
+        radial-gradient(ellipse at 0% 100%, rgba(184, 147, 90, 0.05), transparent 55%),
+        var(--grain);
+      background-size: 100% 100%, 220px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .about-text {
+      padding: 2.25rem 2.5rem;
+    }
+
+    .about-text p {
+      color: var(--muted);
       font-size: 0.9375rem;
     }
 
-    footer {
+    .about-text p + p { margin-top: 1rem; }
+
+    .about-aside {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
+      gap: 0.5rem;
+    }
+
+    .about-aside-num {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .about-aside-label {
       font-size: 0.8125rem;
+      color: var(--faint);
+    }
+
+    /* ── Journal ── */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .tab {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      background: rgba(250, 246, 238, 0.6);
+      background-image: var(--grain);
+      background-size: 180px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 1px 2px rgba(30, 26, 22, 0.04);
+    }
+
+    .tab:hover {
+      border-color: var(--accent-soft);
+      color: var(--text);
+    }
+
+    .tab.active {
+      background: var(--accent);
+      background-image: none;
+      border-color: var(--accent);
+      color: var(--surface);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .post.featured {
+      grid-column: 1 / -1;
+    }
+
+    .post {
+      display: block;
+      padding: 1.5rem 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+    }
+
+    .post::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent-soft);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .post:hover::after { opacity: 1; }
+
+    .post.featured {
+      background-color: var(--surface-warm);
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent,
+          transparent 27px,
+          rgba(100, 70, 45, 0.06) 27px,
+          rgba(100, 70, 45, 0.06) 28px
+        ),
+        var(--grain);
+      background-size: 100% 28px, 220px;
+    }
+
+    .post.featured::after { opacity: 0.7; }
+
+    .post:hover { transform: translateY(-2px); }
+    .post.hidden { display: none; }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .post-cat {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .post-date {
+      font-size: 0.75rem;
+      color: var(--faint);
+    }
+
+    .post-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .post:hover .post-title { color: var(--accent); }
+
+    .post-excerpt {
+      margin-top: 0.35rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Skills ── */
+    .skills-row {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .skills-aside {
+      padding: 1.5rem;
+      position: sticky;
+      top: calc(var(--nav-h) + 1.5rem);
+    }
+
+    .skills-aside-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .skills-aside-desc {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .skill {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .skill-name {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-track {
+      height: 3px;
+      background: var(--line-strong);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+      border-radius: 100px;
+      transition: width 1s var(--ease);
+    }
+
+    .skill.visible .skill-fill { width: var(--lv); }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 3px;
+      color: var(--muted);
+      background: rgba(250, 246, 238, 0.7);
+      background-image: var(--grain);
+      background-size: 160px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 1.75rem 1.75rem 1.75rem 2.75rem;
+      background: var(--surface);
+      background-image: var(--grain);
+      background-size: 240px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 1.25rem;
+      top: 1.75rem;
+      bottom: 1.75rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent-soft), var(--line-strong));
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 0 0 2rem 1.25rem;
+    }
+
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -1.65rem;
+      top: 0.55rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      border: 2px solid var(--surface);
+      box-shadow: 0 0 0 1px var(--line-strong);
+      transform: translateX(-3px);
+    }
+
+    .tl-year {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.25rem;
+    }
+
+    .tl-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+
+    .tl-desc {
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 0 4rem;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--faint);
     }
 
     footer a {
@@ -189,53 +716,379 @@
       text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Live2D note ── */
+    .live2d-note {
+      position: fixed;
+      bottom: 1.25rem;
+      right: calc(var(--live2d) + 0.75rem);
+      max-width: 180px;
+      padding: 0.625rem 0.875rem;
+      background: #f5ecc8;
+      background-image: var(--grain);
+      background-size: 160px;
+      border: 1px solid rgba(160, 130, 60, 0.25);
+      border-radius: 3px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+      box-shadow: var(--shadow);
+      z-index: 95;
+      transform: rotate(-1.5deg);
+      animation: enter 0.8s var(--ease) 1s both;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      filter: blur(4px);
+      transition:
+        opacity 0.8s var(--ease),
+        transform 0.8s var(--ease),
+        filter 0.8s var(--ease);
+      transition-delay: var(--d, 0ms);
+    }
+
+    .reveal.from-b:not(.show) { transform: translateY(24px); }
+    .reveal.from-t:not(.show) { transform: translateY(-24px); }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .hero-title, .hero-desc, .live2d-note {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .hero-layout,
+      .about-grid,
+      .skills-row {
+        grid-template-columns: 1fr;
+      }
+
+      .sec-head-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-side { flex-direction: row; }
+
+      .hero-stat { flex: 1; }
+
+      .hero-index { flex: 1.4; }
+
+      .skills-aside { position: static; }
+
+      .posts { grid-template-columns: 1fr; }
+
+      .post.featured { grid-column: auto; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --live2d: 0px; }
+
+      .wrap,
+      .nav-inner {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .section-alt {
+        margin: 0 -1.25rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .nav-links { display: none; }
+
+      .skills-grid { grid-template-columns: 1fr; }
+
+      .live2d-note { display: none; }
+
+      section { padding: 3.5rem 0; }
+
+      .hero-side { flex-direction: column; }
+
+      .hero-sheet {
+        padding: 2rem 1.75rem 2rem 2.25rem;
+        min-height: auto;
+      }
+
+      .hero-sheet::before { left: 1.75rem; }
+
+      .hero-index-list { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <a class="logo" href="/">irissakuya</a>
-      <p class="tagline">记录知识与文章</p>
+  <div class="bg" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Irissakuya</a>
+      <ul class="nav-links">
+        <li><a href="about/">About</a></li>
+        <li><a href="journal/">Journal</a></li>
+        <li><a href="skills/">Skills</a></li>
+        <li><a href="achievements/">Achievements</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-layout">
+        <div class="hero-sheet">
+          <h1 class="hero-title">In stillness,<br>letters learn to <em>bloom</em></h1>
+          <p class="hero-desc">
+            A quiet corner for learning notes, research findings,
+            and fragments of everyday life.
+          </p>
+          <div class="hero-rule" aria-hidden="true"></div>
+        </div>
+        <div class="hero-side">
+          <div class="card hero-stat">
+            <span class="hero-stat-num">∞</span>
+            <span class="hero-stat-label">Pages yet to write</span>
+          </div>
+          <div class="card hero-index">
+            <p class="hero-index-title">Contents</p>
+            <ul class="hero-index-list">
+              <li><a href="about/">About</a></li>
+              <li><a href="journal/">Journal</a></li>
+              <li><a href="skills/">Skills</a></li>
+              <li><a href="achievements/">Achievements</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section class="intro">
-        <div class="card">
-          <h2>关于</h2>
-          <p>欢迎来到 irissakuya。这里是我整理知识、撰写与分享文章的个人站点。</p>
-          <p>内容会持续更新，涵盖技术笔记、阅读思考与日常记录。</p>
+      <section id="about">
+        <div class="sec-head reveal">
+          <p class="sec-label">About</p>
+          <h2 class="sec-title">A space for thought</h2>
+        </div>
+        <div class="about-grid rg">
+          <div class="card about-text reveal">
+            <p>
+              Welcome to Irissakuya — my personal archive for documenting
+              what I learn, what I discover, and the small moments that
+              shape how I see the world.
+            </p>
+            <p>
+              This site grows slowly and intentionally: study notes,
+              research summaries, and occasional reflections on daily life.
+            </p>
+          </div>
+          <div class="card about-aside reveal">
+            <span class="about-aside-num">3</span>
+            <span class="about-aside-label">Topics covered<br>notes · research · life</span>
+          </div>
         </div>
       </section>
 
-      <section>
-        <div class="card">
-          <h2>文章</h2>
-          <ul class="articles">
-            <li>
-              <p class="empty-hint">暂无文章，敬请期待。</p>
-            </li>
-          </ul>
+      <section id="journal" class="section-alt">
+        <div class="sec-head-row reveal">
+          <div class="sec-head">
+            <p class="sec-label">Journal</p>
+            <h2 class="sec-title">Recent writings</h2>
+          </div>
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-f="all" role="tab">All</button>
+            <button class="tab" data-f="notes" role="tab">Notes</button>
+            <button class="tab" data-f="research" role="tab">Research</button>
+            <button class="tab" data-f="life" role="tab">Daily Life</button>
+          </div>
+        </div>
+
+        <div class="posts rg" id="posts">
+          <a href="#" class="card post featured reveal" data-c="notes">
+            <div class="post-meta">
+              <span class="post-cat">Learning Notes</span>
+              <time class="post-date" datetime="2026-05-28">May 28, 2026</time>
+            </div>
+            <h3 class="post-title">Getting Started with This Garden</h3>
+            <p class="post-excerpt">
+              How I plan to structure my notes, tag entries, and keep this
+              space alive without turning it into a chore.
+            </p>
+          </a>
+
+          <a href="#" class="card post reveal" data-c="research">
+            <div class="post-meta">
+              <span class="post-cat">Research</span>
+              <time class="post-date" datetime="2026-05-20">May 20, 2026</time>
+            </div>
+            <h3 class="post-title">Exploring Ideas Worth Pursuing</h3>
+            <p class="post-excerpt">
+              A placeholder for future research summaries — hypotheses,
+              experiments, and conclusions worth revisiting.
+            </p>
+          </a>
+
+          <a href="#" class="card post reveal" data-c="life">
+            <div class="post-meta">
+              <span class="post-cat">Daily Life</span>
+              <time class="post-date" datetime="2026-05-15">May 15, 2026</time>
+            </div>
+            <h3 class="post-title">Small Rituals, Quiet Mornings</h3>
+            <p class="post-excerpt">
+              Reflections on routine, stillness, and the ordinary moments
+              that accumulate into something meaningful.
+            </p>
+          </a>
         </div>
       </section>
 
-      <section>
-        <div class="card">
-          <h2>链接</h2>
-          <div class="links">
-            <a class="link-item" href="https://github.com/gdsly4444/irissakuya" target="_blank" rel="noopener noreferrer">
-              GitHub 仓库
-            </a>
+      <section id="skills">
+        <div class="sec-head reveal">
+          <p class="sec-label">Skills</p>
+          <h2 class="sec-title">Tools of the trade</h2>
+        </div>
+
+        <div class="skills-row rg">
+          <div class="skills-grid">
+            <div class="card skill reveal" data-lv="85">
+              <p class="skill-name">Programming</p>
+              <div class="skill-track"><div class="skill-fill" style="--lv:85%"></div></div>
+            </div>
+            <div class="card skill reveal" data-lv="75">
+              <p class="skill-name">Research & Analysis</p>
+              <div class="skill-track"><div class="skill-fill" style="--lv:75%"></div></div>
+            </div>
+            <div class="card skill reveal" data-lv="70">
+              <p class="skill-name">Technical Writing</p>
+              <div class="skill-track"><div class="skill-fill" style="--lv:70%"></div></div>
+            </div>
+            <div class="card skill reveal" data-lv="65">
+              <p class="skill-name">Design & Aesthetics</p>
+              <div class="skill-track"><div class="skill-fill" style="--lv:65%"></div></div>
+            </div>
+          </div>
+
+          <aside class="card skills-aside reveal">
+            <h3 class="skills-aside-title">Stack & tools</h3>
+            <p class="skills-aside-desc">Technologies I reach for most often.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Git</span>
+              <span class="tag">LaTeX</span>
+              <span class="tag">Data Analysis</span>
+              <span class="tag">Machine Learning</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="achievements" class="section-alt">
+        <div class="sec-head reveal">
+          <p class="sec-label">Achievements</p>
+          <h2 class="sec-title">Milestones along the way</h2>
+        </div>
+
+        <div class="timeline rg">
+          <div class="tl-item reveal">
+            <p class="tl-year">2026</p>
+            <h3 class="tl-title">Launched Irissakuya</h3>
+            <p class="tl-desc">Started this personal knowledge garden to document learning and life.</p>
+          </div>
+          <div class="tl-item reveal">
+            <p class="tl-year">Placeholder</p>
+            <h3 class="tl-title">Your next milestone</h3>
+            <p class="tl-desc">Replace with degrees, certifications, awards, or projects you're proud of.</p>
+          </div>
+          <div class="tl-item reveal">
+            <p class="tl-year">Placeholder</p>
+            <h3 class="tl-title">Another achievement</h3>
+            <p class="tl-desc">Competitions, publications, open-source contributions — anything that matters to you.</p>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <p>&copy; 2026 irissakuya · <a href="https://github.com/gdsly4444/irissakuya">GitHub</a></p>
+    <footer class="reveal">
+      <p>&copy; 2026 Irissakuya · <a href="https://github.com/gdsly4444/irissakuya" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </footer>
   </div>
+
+  <p class="live2d-note">Say hello to Hijiki — he keeps me company while I write.</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+  <script>
+    L2Dwidget.init({
+      model: {
+        jsonPath: "https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json",
+        scale: 1
+      },
+      display: { position: "right", width: 180, height: 320, hOffset: 16, vOffset: 0 },
+      mobile: { show: true, scale: 0.4 },
+      react: { opacityDefault: 1, opacityOnHover: 0.9 }
+    });
+  </script>
+
+  <script>
+    const nav = document.getElementById("nav");
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", scrollY > 16);
+    }, { passive: true });
+
+    document.querySelectorAll(".tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.f;
+        document.querySelectorAll(".post").forEach(p => {
+          p.classList.toggle("hidden", f !== "all" && p.dataset.c !== f);
+        });
+      });
+    });
+
+    document.querySelectorAll(".rg").forEach(g => {
+      g.querySelectorAll(".reveal").forEach((el, i) => {
+        el.style.setProperty("--d", i * 100 + "ms");
+      });
+    });
+
+    let lastY = scrollY, dir = "down";
+    addEventListener("scroll", () => {
+      dir = scrollY > lastY ? "down" : "up";
+      lastY = scrollY;
+    }, { passive: true });
+
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => {
+        const el = e.target;
+        if (e.isIntersecting) {
+          el.classList.remove("from-t", "from-b");
+          el.classList.add(dir === "down" ? "from-b" : "from-t", "show");
+          if (el.classList.contains("skill")) el.classList.add("visible");
+        } else {
+          el.classList.remove("show", "from-t", "from-b");
+          el.classList.add(dir === "down" ? "from-t" : "from-b");
+          if (el.classList.contains("skill")) el.classList.remove("visible");
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+
+    document.querySelectorAll(".reveal, .skill").forEach(el => {
+      el.classList.add("from-b");
+      io.observe(el);
+    });
+  </script>
 </body>
 </html>

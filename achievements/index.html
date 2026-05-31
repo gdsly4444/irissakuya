@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Achievements and milestones on Irissakuya.">
+  <title>Achievements · Irissakuya</title>
+  <link rel="stylesheet" href="../assets/page.css">
+</head>
+<body class="theme-achievements">
+
+  <div class="bg" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="../index.html">Irissakuya</a>
+      <ul class="nav-links">
+        <li><a href="../about/">About</a></li>
+        <li><a href="../journal/">Journal</a></li>
+        <li><a href="../skills/">Skills</a></li>
+        <li><a href="../achievements/" class="active">Achievements</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-banner">
+    <div class="banner-bg" aria-hidden="true"></div>
+    <div class="banner-inner">
+      <div class="banner-copy">
+        <p class="banner-label">Achievements</p>
+        <h1 class="banner-title">Milestones along the way</h1>
+        <p class="banner-desc">Degrees, awards, projects, and moments worth remembering.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main class="page-body">
+      <div class="toolbar reveal">
+        <div class="toolbar-left">
+          <a class="back-link" href="../index.html">← Home</a>
+          <span class="page-count" id="count">0 entries</span>
+        </div>
+      </div>
+
+      <div class="list-panel card reveal rg">
+        <ul class="elegant-list" id="list"></ul>
+        <div class="empty-state">
+          <span class="empty-mark">★</span>
+          <p class="empty-title">No milestones recorded</p>
+          <p class="empty-desc">Certifications, competitions, publications, and personal victories will be listed here over time.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Irissakuya · <a href="https://github.com/gdsly4444/irissakuya" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </footer>
+  </div>
+
+  <p class="live2d-note">Say hello to Hijiki — he keeps me company while I write.</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.1.4/lib/L2Dwidget.min.js"></script>
+  <script>
+    L2Dwidget.init({
+      model: { jsonPath: "https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json", scale: 1 },
+      display: { position: "right", width: 180, height: 320, hOffset: 16, vOffset: 0 },
+      mobile: { show: true, scale: 0.4 },
+      react: { opacityDefault: 1, opacityOnHover: 0.9 }
+    });
+  </script>
+  <script src="../assets/page.js"></script>
+</body>
+</html>
