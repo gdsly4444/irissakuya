@@ -1,0 +1,11 @@
+# Curated external blogs — add entries here, then ask agent to publish to readings/index.html
+
+# Example entry:
+# - name: Example Garden
+#   author: Someone
+#   url: https://example.com
+#   description: A quiet blog about ...
+#   tags: [tech, craft]
+#   category: tech  # tech | life | craft
+
+items: []

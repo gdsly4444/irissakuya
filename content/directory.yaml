@@ -1,0 +1,10 @@
+# Web directory (yellow pages)
+
+items:
+  - slug: bilibili
+    name: Bilibili
+    domain: bilibili.com
+    url: https://www.bilibili.com
+    category: media  # media | tools | community
+    tags: [Video, Anime, Community, Learning]
+    description: China's leading video community — anime, gaming, knowledge, and creator culture.

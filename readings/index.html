@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Journal — learning notes, research, and daily life on Irissakuya.">
-  <title>Journal · Irissakuya</title>
+  <meta name="description" content="Readings — curated blogs and voices from across the web on Irissakuya.">
+  <title>Readings · Irissakuya</title>
   <link rel="stylesheet" href="../assets/page.css">
 </head>
-<body class="theme-journal">
+<body class="theme-readings">
 
   <div class="bg" aria-hidden="true"></div>
 
@@ -16,10 +16,10 @@
       <a class="nav-logo" href="../index.html">Irissakuya</a>
       <ul class="nav-links">
         <li><a href="../about/">About</a></li>
-        <li><a href="../journal/" class="active">Journal</a></li>
+        <li><a href="../journal/">Journal</a></li>
         <li><a href="../skills/">Skills</a></li>
         <li><a href="../achievements/">Achievements</a></li>
-        <li><a href="../readings/">Readings</a></li>
+        <li><a href="../readings/" class="active">Readings</a></li>
         <li><a href="../directory/">Directory</a></li>
       </ul>
     </div>
@@ -29,9 +29,9 @@
     <div class="banner-bg" aria-hidden="true"></div>
     <div class="banner-inner">
       <div class="banner-copy">
-        <p class="banner-label">Journal</p>
-        <h1 class="banner-title">Recent writings</h1>
-        <p class="banner-desc">Learning notes, research findings, and fragments of everyday life.</p>
+        <p class="banner-label">Readings</p>
+        <h1 class="banner-title">Voices from the wider web</h1>
+        <p class="banner-desc">A curated shelf of blogs worth visiting — collected, annotated, and kept close at hand.</p>
       </div>
     </div>
   </header>
@@ -41,23 +41,33 @@
       <div class="toolbar reveal">
         <div class="toolbar-left">
           <a class="back-link" href="../index.html">← Home</a>
-          <span class="page-count" id="count">0 entries</span>
+          <span class="page-count" id="count">0 blogs</span>
         </div>
         <div class="tabs" role="tablist">
           <button class="tab active" data-f="all" role="tab">All</button>
-          <button class="tab" data-f="notes" role="tab">Notes</button>
-          <button class="tab" data-f="research" role="tab">Research</button>
-          <button class="tab" data-f="life" role="tab">Daily Life</button>
+          <button class="tab" data-f="tech" role="tab">Tech</button>
+          <button class="tab" data-f="life" role="tab">Life</button>
+          <button class="tab" data-f="craft" role="tab">Craft</button>
         </div>
       </div>
 
-      <div class="list-panel card reveal rg">
-        <ul class="elegant-list" id="list"></ul>
-        <div class="empty-state">
-          <span class="empty-mark">✎</span>
-          <p class="empty-title">The page is blank — for now</p>
-          <p class="empty-desc">Articles will be listed here. Add HTML files or list items when you're ready to publish your first note.</p>
-        </div>
+      <div class="card readings-intro reveal">
+        <p>
+          This corner gathers personal sites and blogs discovered online —
+          each entry is chosen for clarity of thought, warmth of voice, or
+          simply the pleasure of reading.
+        </p>
+        <p>
+          New finds will appear here as cards below. For now, the shelf waits.
+        </p>
+      </div>
+
+      <div class="readings-grid rg" id="readings-grid"></div>
+
+      <div class="empty-state reveal">
+        <span class="empty-mark">❧</span>
+        <p class="empty-title">No blogs collected yet</p>
+        <p class="empty-desc">Share a link and I'll add a card — name, author, a line of description, and tags.</p>
       </div>
     </main>
 
