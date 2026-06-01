@@ -1,0 +1,52 @@
+---
+description: Content source layout, formats, and publish workflow for Irissakuya static site. Use when adding journal posts, updating About/Skills/Achievements, or converting user writing to HTML.
+alwaysApply: true
+---
+
+# Irissakuya content workflow
+
+## Source of truth
+
+- User-authored content lives in `content/` only.
+- Generated/presentation HTML lives in `about/`, `journal/`, `skills/`, `achievements/`, `index.html`.
+- Never ask the user to hand-edit HTML for routine content updates.
+
+## Directory layout
+
+```
+content/
+  about.yaml
+  skills.yaml
+  achievements.yaml
+  journal/YYYY-MM-DD-slug.md
+assets/images/          ← article images
+journal/posts/slug.html ← generated articles
+```
+
+## Formats
+
+- **Journal**: Markdown + YAML frontmatter (`title`, `date`, `category`, `description`, `draft`, `featured`, `tags`). Categories: `notes` | `research` | `life`.
+- **About / Skills / Achievements**: YAML (see `content/README.md` for schemas).
+- Filenames: `YYYY-MM-DD-slug.md`; slug becomes URL under `journal/posts/`.
+
+## Agent duties when publishing
+
+1. Read or receive content in the formats above.
+2. Generate or update HTML using existing classes in `assets/page.css` (`.elegant-list`, `.card`, `.list-item`, etc.).
+3. Update list pages (`journal/index.html`), hide empty state when entries exist, sync `updateCount()` data.
+4. Optionally surface latest or `featured` posts on `index.html`.
+5. Keep site UI in English unless the user explicitly requests Chinese content.
+
+## User commands (act on these)
+
+- “发布 `content/journal/…md`” → generate post HTML + update lists.
+- “把下面加到 About …” → update `content/about.yaml` + `about/index.html`.
+- “更新 skills/achievements …” → update YAML + matching page.
+
+## Do not
+
+- Use Word/PDF/Notion export as source without converting to Markdown/YAML first.
+- Duplicate content in both `content/` and HTML without syncing.
+- Break existing banner themes, nav, or Live2D setup when adding pages.
+
+Full templates and examples: `content/README.md`.
